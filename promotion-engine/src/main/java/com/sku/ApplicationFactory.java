@@ -7,6 +7,8 @@ import java.util.List;
 import com.sku.calculators.PromotionDiscountCalculator;
 import com.sku.engine.PromotionEngine;
 import com.sku.engine.PromotionEngineImpl;
+import com.sku.entites.base.Item;
+import com.sku.entites.base.SKUId;
 import com.sku.entites.promotion.Promotion;
 import com.sku.inventory.InMemoryPriceInventory;
 import com.sku.inventory.PriceInventory;
@@ -38,29 +40,35 @@ public class ApplicationFactory {
 
     /**
      * get the sigleton instance of {@link PromotionEngine}
-     * 
+     *
      * @return
      */
     public static PromotionEngine getPromotionEngine() {
-	PromotionEngine promotionEngine = PromotionEngineImpl.getInstance();
+	final PromotionEngine promotionEngine = PromotionEngineImpl.getInstance();
 	initPromotionEngine(promotionEngine);
 	return promotionEngine;
     }
 
     /**
      * initialize the Promotion engine with the necessary fields
-     * 
+     *
      * @param promotionEngine to be initilized
      */
-    private static void initPromotionEngine(PromotionEngine promotionEngine) {
+    private static void initPromotionEngine(final PromotionEngine promotionEngine) {
 	promotionDiscountCalculator.forEach(promotionEngine::addPromotionDiscountCalculator);
     }
 
     /**
      * Get singleton instance of {@link PriceInventory}
-     * 
+     *
      */
     public static PriceInventory getPriceInventory() {
 	return InMemoryPriceInventory.getInstance();
+    }
+
+    public static Item getItemOf(final SKUId skuId) {
+	final PriceInventory priceInventory = getPriceInventory();
+	final double price = priceInventory.getPrice(skuId);
+	return new Item(skuId, price);
     }
 }
