@@ -1,4 +1,4 @@
-package com.sku.entites.inventory;
+package com.sku.inventory;
 
 import com.sku.entites.base.SKUId;
 

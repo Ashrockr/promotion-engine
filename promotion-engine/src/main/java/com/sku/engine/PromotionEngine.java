@@ -1,7 +1,7 @@
 package com.sku.engine;
 
+import com.sku.calculators.PromotionDiscountCalculator;
 import com.sku.entites.base.Cart;
-import com.sku.entites.inventory.PriceInventory;
 import com.sku.entites.promotion.Promotion;
 
 /**
@@ -13,26 +13,20 @@ import com.sku.entites.promotion.Promotion;
 public interface PromotionEngine {
 
     /**
-     * adds a Promotion into the {@link PromotionEngine}, which is to be applied
-     * during amount calculation.
+     * adds a PromotionDiscountCalculator into the {@link PromotionEngine}, which is
+     * to be applies and calculates the discount.
      * 
-     * @param promotion {@link Promotion} to be applied
+     * @param promotionDiscountCalculator {@link PromotionDiscountCalculator} to be
+     *                                    applied
      */
-    public void addPromotion(Promotion promotion);
+    public void addPromotionDiscountCalculator(PromotionDiscountCalculator promotionDiscountCalculator);
 
     /**
-     * sets the {@link PriceInventory} which shall provide the price of an item
-     * 
-     * @param priceInventory
-     */
-    public void addPriceData(PriceInventory priceInventory);
-
-    /**
-     * calculates the total amount of the cart after applying the available
+     * calculates the total discount amount of the cart after applying the available
      * {@link Promotion}
      * 
-     * @param cart {@link Cart} who's total amount needs to be calculated
+     * @param cart {@link Cart} who's total discount amount needs to be calculated
      * @return total amount of cart
      */
-    public double calculateValue(Cart cart);
+    public double calculateDiscount(Cart cart);
 }
