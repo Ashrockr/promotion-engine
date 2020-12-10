@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  * Entity holding the all {@link ItemOrder}s.
- * 
+ *
  * @author ashish
  */
 public class Cart {
@@ -16,14 +16,14 @@ public class Cart {
 
     private double totalPrice = 0;
 
-    private double discountedPrice = 0;
+    private double discountPrice = 0;
 
     /**
      * add {@link ItemOrder} into the cart
-     * 
+     *
      * @param itemOrder to be added to cart (require non null)
      */
-    public void addItemOrder(ItemOrder itemOrder) {
+    public void addItemOrder(final ItemOrder itemOrder) {
 	Objects.requireNonNull(itemOrder, "null item entered");
 	itemOrders.add(itemOrder);
 
@@ -32,7 +32,7 @@ public class Cart {
 
     /**
      * provides all the items added in the cart
-     * 
+     *
      * @return unmodifiable {@link List} of items (never null)
      */
     public List<ItemOrder> getAllItemOrders() {
@@ -44,11 +44,11 @@ public class Cart {
     }
 
     public double getDiscountedPrice() {
-	return discountedPrice;
+	return totalPrice - discountPrice;
     }
 
-    public void setDiscountedPrice(double discountedPrice) {
-	this.discountedPrice = discountedPrice;
+    public void setDiscountPrice(final double discountPrice) {
+	this.discountPrice = discountPrice;
     }
 
     @Override
@@ -65,15 +65,14 @@ public class Cart {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
 	if (this == obj)
 	    return true;
 	if (obj == null)
 	    return false;
 	if (getClass() != obj.getClass())
 	    return false;
-	Cart other = (Cart) obj;
+	final Cart other = (Cart) obj;
 	return itemOrders.equals(other.itemOrders);
     }
-
 }

@@ -10,6 +10,7 @@ import java.util.Set;
 import com.sku.calculators.PromotionDiscountCalculator;
 import com.sku.entites.base.Cart;
 import com.sku.entites.base.ItemOrder;
+import com.sku.entites.promotion.Promotion;
 
 public class PromotionEngineImpl implements PromotionEngine {
 
@@ -18,7 +19,7 @@ public class PromotionEngineImpl implements PromotionEngine {
     private final Set<PromotionDiscountCalculator> promotionDiscountCalculators = new HashSet<>();
 
     /**
-     * 
+     *
      * @return {@link PromotionEngineImpl} instance
      */
     public static PromotionEngine getInstance() {
@@ -29,20 +30,30 @@ public class PromotionEngineImpl implements PromotionEngine {
     }
 
     @Override
-    public void addPromotionDiscountCalculator(PromotionDiscountCalculator promotionDiscountCalculator) {
+    public void addPromotionDiscountCalculator(final PromotionDiscountCalculator promotionDiscountCalculator) {
 	Objects.requireNonNull(promotionDiscountCalculators);
 	promotionDiscountCalculators.add(promotionDiscountCalculator);
     }
 
     @Override
-    public double calculateDiscount(Cart cart) {
+    public double calculateDiscount(final Cart cart) {
+	Objects.requireNonNull(cart, "cart should not be null");
 	final List<ItemOrder> itemOrders = new ArrayList<>(cart.getAllItemOrders());// create a copy of item orders
 	final Iterator<ItemOrder> itemOrderIterator = itemOrders.iterator();
 	double discountTotal = 0;
-	for (PromotionDiscountCalculator promotionDiscountCalculator : promotionDiscountCalculators) {
+	for (final PromotionDiscountCalculator promotionDiscountCalculator : promotionDiscountCalculators) {
 	    discountTotal += promotionDiscountCalculator.getDiscountPrice(itemOrderIterator);
 	}
 	return discountTotal;
+    }
+
+    @Override
+    public void addPromotion(final Promotion promotion) {
+	for (final PromotionDiscountCalculator promotionDiscountCalculator : promotionDiscountCalculators) {
+	    if (promotionDiscountCalculator.acceptsPromotion(promotion)) {
+		promotionDiscountCalculator.addPromotion(promotion);
+	    }
+	}
     }
 
 }

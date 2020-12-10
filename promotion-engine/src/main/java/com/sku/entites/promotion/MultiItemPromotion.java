@@ -1,17 +1,19 @@
 package com.sku.entites.promotion;
 
+import java.util.List;
+
 import com.sku.entites.base.ItemOrder;
 
 /**
  * Promotion for multiple items
- * 
- * @author aspaliwa
+ *
+ * @author ashish
  *
  */
-public interface MultiItemPromotion {
+public interface MultiItemPromotion extends Promotion {
     /**
      * calculate the total discount for a given item
-     * 
+     *
      */
-    public double getTotalDiscount(Iterable<ItemOrder> itemOrder);
+    public double getTotalDiscount(List<ItemOrder> itemOrder);
 }
