@@ -26,7 +26,7 @@ public class NItemDiscount implements SingleItemPromotion {
 	if (Objects.equals(item.getId(), sKUId) && quantity > 0) {
 	    final int discountedItem = itemOrder.getQuantity() / quantity;
 	    if (discountedItem > 0) {
-		return (item.getPrice() * quantity) - (discountedItem * fixedPrice);
+		return discountedItem * ((item.getPrice() * quantity) - fixedPrice);
 	    }
 	}
 	return 0;
