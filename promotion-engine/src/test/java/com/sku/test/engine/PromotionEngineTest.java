@@ -12,6 +12,7 @@ import com.sku.entites.base.Item;
 import com.sku.entites.base.ItemOrder;
 import com.sku.entites.base.SKUId;
 import com.sku.exception.InvalidSKUIdException;
+import com.sku.exception.ValidationException;
 import com.sku.inventory.PriceInventory;
 
 public class PromotionEngineTest {
@@ -63,7 +64,7 @@ public class PromotionEngineTest {
      * Test case: Single item Promotion calculator is added.
      */
     @Test
-    public void testPromotionNItemDiscount() {
+    public void testPromotionNItemDiscount() throws ValidationException {
 	final PromotionEngine promotionEngine = ApplicationFactory.getPromotionEngine();
 	final Cart cart = getCartOf(SKUId.of('A'), 3);
 	final double discount = promotionEngine.calculateDiscount(cart);
@@ -76,7 +77,7 @@ public class PromotionEngineTest {
      * Test case: Multi item Promotion calculator is added.
      */
     @Test
-    public void testPromotionMultiItemDiscount() {
+    public void testPromotionMultiItemDiscount() throws ValidationException {
 	final PromotionEngine promotionEngine = ApplicationFactory.getPromotionEngine();
 	final Cart cart = getCartOf(SKUId.of('C'), 3);
 	cart.addItemOrder(getItemOrder(SKUId.of('D'), 2));
@@ -97,7 +98,7 @@ public class PromotionEngineTest {
      * </pre>
      */
     @Test
-    public void testPromotionAllItemDiscountScenario1() {
+    public void testPromotionAllItemDiscountScenario1() throws ValidationException {
 	final PromotionEngine promotionEngine = ApplicationFactory.getPromotionEngine();
 	final Cart cart = getCartOf(SKUId.of('A'), 1);
 	cart.addItemOrder(getItemOrder(SKUId.of('B'), 1));
@@ -119,7 +120,7 @@ public class PromotionEngineTest {
      * </pre>
      */
     @Test
-    public void testPromotionAllItemDiscountScenario2() {
+    public void testPromotionAllItemDiscountScenario2() throws ValidationException {
 	final PromotionEngine promotionEngine = ApplicationFactory.getPromotionEngine();
 	final Cart cart = getCartOf(SKUId.of('A'), 5);
 	cart.addItemOrder(getItemOrder(SKUId.of('B'), 5));

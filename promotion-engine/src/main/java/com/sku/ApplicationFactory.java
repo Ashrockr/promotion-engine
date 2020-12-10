@@ -108,30 +108,4 @@ public class ApplicationFactory {
 	return new Item(skuId, price);
     }
 
-    /**
-     * get a new instance of {@link Promotion} for the provided
-     * {@link PromotionType}
-     *
-     * @throws ValidationException if no {@link Promotion} available for the
-     *                             provided {@link PromotionType}
-     */
-    public static Promotion getPromotionOfType(final PromotionType promotionType) throws ValidationException {
-	final Supplier<Promotion> promotionSupplier = availablePromotions.get(promotionType);
-	if (promotionSupplier == null) {
-	    throw new ValidationException("No Promotion available for " + promotionType);
-	}
-	final Promotion promotion = promotionSupplier.get();
-	initPromotion(promotion);
-	return promotion;
-    }
-
-    /**
-     * initialze promotion.
-     *
-     * @param promotion
-     */
-    private static void initPromotion(final Promotion promotion) {
-	// TODO Auto-generated method stub
-
-    }
 }
