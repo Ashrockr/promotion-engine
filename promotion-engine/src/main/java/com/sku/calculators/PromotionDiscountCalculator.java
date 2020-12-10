@@ -27,5 +27,5 @@ public interface PromotionDiscountCalculator {
      * calculate the total discount of the provided items from the available
      * promotion.
      */
-    public double getDiscountPrice(List<ItemOrder> itemIterator);
+    public double getDiscountPrice(List<ItemOrder> itemOrderList);
 }

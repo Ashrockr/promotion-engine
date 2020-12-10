@@ -1,6 +1,5 @@
 package com.sku.factory;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,6 +8,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import com.sku.calculators.PromotionDiscountCalculator;
+import com.sku.calculators.SinglePromotionOfferCalculator;
 import com.sku.engine.PromotionEngine;
 import com.sku.engine.PromotionEngineImpl;
 import com.sku.entites.base.Item;
@@ -42,7 +42,7 @@ public class ApplicationFactory {
     private static final Map<PromotionType, Supplier<Promotion>> availablePromotions;
 
     static {
-	promotionDiscountCalculator = Collections.unmodifiableList(new ArrayList<>());
+	promotionDiscountCalculator = Collections.unmodifiableList(Arrays.asList(new SinglePromotionOfferCalculator()));
 	availablePromotions = Collections.unmodifiableMap(new HashMap<>());
     }
 

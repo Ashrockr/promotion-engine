@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.sku.ApplicationFactory;
 import com.sku.engine.PromotionEngine;
 import com.sku.engine.PromotionEngineImpl;
 import com.sku.entites.base.Cart;
@@ -13,6 +12,7 @@ import com.sku.entites.base.ItemOrder;
 import com.sku.entites.base.SKUId;
 import com.sku.exception.InvalidSKUIdException;
 import com.sku.exception.ValidationException;
+import com.sku.factory.ApplicationFactory;
 import com.sku.inventory.PriceInventory;
 
 public class PromotionEngineTest {
@@ -31,7 +31,7 @@ public class PromotionEngineTest {
      */
     @Test
     public void testPromotionEngineNoPromotionCalculator() {
-	final PromotionEngine promotionEngine = PromotionEngineImpl.getInstance();
+	final PromotionEngine promotionEngine = new PromotionEngineImpl();
 	final Cart cart = getCartOf(SKUId.of('A'), 3);
 	final double discount = promotionEngine.calculateDiscount(cart);
 	Assert.assertEquals(0, discount, 0);
