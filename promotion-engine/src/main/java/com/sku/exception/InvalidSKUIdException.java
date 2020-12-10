@@ -21,7 +21,6 @@ public class InvalidSKUIdException extends RuntimeException {
 
     public InvalidSKUIdException(final String message, final Throwable cause) {
 	super(message, cause);
-	// TODO Auto-generated constructor stub
     }
 
     public InvalidSKUIdException(final String message) {

@@ -44,7 +44,7 @@ public class ApplicationFactory {
      * @return
      * @throws ValidationException if all promotions could not be initialized
      */
-    public static PromotionEngine getPromotionEngine() throws ValidationException {
+    public static PromotionEngine getPromotionEngine() {
 	final PromotionEngine promotionEngine = PromotionEngineImpl.getInstance();
 	initPromotionEngine(promotionEngine);
 	return promotionEngine;
@@ -56,14 +56,14 @@ public class ApplicationFactory {
      * @param promotionEngine to be initilized
      * @throws ValidationException
      */
-    private static void initPromotionEngine(final PromotionEngine promotionEngine) throws ValidationException {
+    private static void initPromotionEngine(final PromotionEngine promotionEngine) {
 	promotionDiscountCalculator.forEach(promotionEngine::addPromotionDiscountCalculator);
 	for (final Promotion promotion : getAllActivePromotions()) {
 	    promotionEngine.addPromotion(promotion);
 	}
     }
 
-    private static List<Promotion> getAllActivePromotions() throws ValidationException {
+    private static List<Promotion> getAllActivePromotions() {
 	// creates the available promotions
 	// TODO read form external file?
 	final NItemDiscount aOf130For3 = new NItemDiscount();

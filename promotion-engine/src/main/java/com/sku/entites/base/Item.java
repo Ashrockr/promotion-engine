@@ -57,13 +57,12 @@ public class Item {
 	    return false;
 	final Item other = (Item) obj;
 	if (id == null) {
-	    if (other.id != null)
+	    if (other.id != null) {
 		return false;
+	    }
 	} else if (!id.equals(other.id))
 	    return false;
-	if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
-	    return false;
-	return true;
+	return Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price);
     }
 
 }

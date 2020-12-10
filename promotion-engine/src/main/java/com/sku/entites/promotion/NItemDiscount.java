@@ -75,8 +75,9 @@ public class NItemDiscount implements SingleItemPromotion {
 	if (quantity != other.quantity)
 	    return false;
 	if (sKUId == null) {
-	    if (other.sKUId != null)
+	    if (other.sKUId != null) {
 		return false;
+	    }
 	} else if (!sKUId.equals(other.sKUId))
 	    return false;
 	return true;

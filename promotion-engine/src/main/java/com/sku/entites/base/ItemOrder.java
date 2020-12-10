@@ -52,13 +52,12 @@ public class ItemOrder {
 	    return false;
 	final ItemOrder other = (ItemOrder) obj;
 	if (item == null) {
-	    if (other.item != null)
+	    if (other.item != null) {
 		return false;
+	    }
 	} else if (!item.equals(other.item))
 	    return false;
-	if (quantity != other.quantity)
-	    return false;
-	return true;
+	return quantity == other.quantity;
     }
 
 }

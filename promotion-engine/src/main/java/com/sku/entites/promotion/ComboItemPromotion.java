@@ -71,13 +71,12 @@ public class ComboItemPromotion implements MultiItemPromotion {
 	    return false;
 	final ComboItemPromotion other = (ComboItemPromotion) obj;
 	if (comboOn == null) {
-	    if (other.comboOn != null)
+	    if (other.comboOn != null) {
 		return false;
+	    }
 	} else if (!comboOn.equals(other.comboOn))
 	    return false;
-	if (Double.doubleToLongBits(fixedPrice) != Double.doubleToLongBits(other.fixedPrice))
-	    return false;
-	return true;
+	return Double.doubleToLongBits(fixedPrice) == Double.doubleToLongBits(other.fixedPrice);
     }
 
     @Override
