@@ -2,11 +2,9 @@ package com.sku.factory;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
 
+import com.sku.calculators.ComboPromotionOfferCalculator;
 import com.sku.calculators.PromotionDiscountCalculator;
 import com.sku.calculators.SinglePromotionOfferCalculator;
 import com.sku.engine.PromotionEngine;
@@ -16,7 +14,6 @@ import com.sku.entites.base.SKUId;
 import com.sku.entites.promotion.ComboItemPromotion;
 import com.sku.entites.promotion.NItemDiscount;
 import com.sku.entites.promotion.Promotion;
-import com.sku.entites.promotion.PromotionType;
 import com.sku.exception.ValidationException;
 import com.sku.inventory.InMemoryPriceInventory;
 import com.sku.inventory.PriceInventory;
@@ -36,14 +33,9 @@ public class ApplicationFactory {
      */
     private static final List<PromotionDiscountCalculator> promotionDiscountCalculator;
 
-    /**
-     * Unmodifiable Map containing all available {@link Promotion}
-     */
-    private static final Map<PromotionType, Supplier<Promotion>> availablePromotions;
-
     static {
-	promotionDiscountCalculator = Collections.unmodifiableList(Arrays.asList(new SinglePromotionOfferCalculator()));
-	availablePromotions = Collections.unmodifiableMap(new HashMap<>());
+	promotionDiscountCalculator = Collections.unmodifiableList(
+		Arrays.asList(new SinglePromotionOfferCalculator(), new ComboPromotionOfferCalculator()));
     }
 
     /**
