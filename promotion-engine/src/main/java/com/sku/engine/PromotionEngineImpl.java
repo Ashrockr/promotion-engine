@@ -2,7 +2,6 @@ package com.sku.engine;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -39,10 +38,9 @@ public class PromotionEngineImpl implements PromotionEngine {
     public double calculateDiscount(final Cart cart) {
 	Objects.requireNonNull(cart, "cart should not be null");
 	final List<ItemOrder> itemOrders = new ArrayList<>(cart.getAllItemOrders());// create a copy of item orders
-	final Iterator<ItemOrder> itemOrderIterator = itemOrders.iterator();
 	double discountTotal = 0;
 	for (final PromotionDiscountCalculator promotionDiscountCalculator : promotionDiscountCalculators) {
-	    discountTotal += promotionDiscountCalculator.getDiscountPrice(itemOrderIterator);
+	    discountTotal += promotionDiscountCalculator.getDiscountPrice(itemOrders);
 	}
 	return discountTotal;
     }
